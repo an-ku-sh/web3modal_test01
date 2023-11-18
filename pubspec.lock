@@ -265,6 +265,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  fl_toast:
+    dependency: "direct main"
+    description:
+      name: fl_toast
+      sha256: "0f7bbce90d1b75463a414c6a5476e45bd93fa7c4adccce1690076f4d1ef77c42"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -312,6 +320,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
+  get_it:
+    dependency: "direct main"
+    description:
+      name: get_it
+      sha256: f79870884de16d689cf9a7d15eedf31ed61d750e813c538a6efb92660fea83c3
+      url: "https://pub.dev"
+    source: hosted
+    version: "7.6.4"
   glob:
     dependency: transitive
     description:
@@ -345,7 +361,7 @@ packages:
     source: hosted
     version: "0.6.7"
   json_annotation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: json_annotation
       sha256: b10a7b2ff83d83c777edba3c6a0f97045ddadd56c944e1a23a3fdf43a1bf4467
@@ -369,7 +385,7 @@ packages:
     source: hosted
     version: "2.1.1"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
       sha256: "6bbb9d6f7056729537a4309bda2e74e18e5d9f14302489cc1e93f33b3fe32cac"
@@ -585,7 +601,7 @@ packages:
     source: hosted
     version: "1.1.0"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: "81429e4481e1ccfb51ede496e916348668fd0921627779233bd24cc3ff6abd02"
@@ -653,6 +669,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "725bc638d5e79df0c84658e1291449996943f93bacbc2cec49963dbbab48d8ae"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   source_gen:
     dependency: transitive
     description:
@@ -758,7 +782,7 @@ packages:
     source: hosted
     version: "1.3.2"
   universal_io:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: universal_io
       sha256: "1722b2dcc462b4b2f3ee7d188dad008b6eb4c40bbd03a3de451d82c78bba9aad"
@@ -878,7 +902,7 @@ packages:
     source: hosted
     version: "0.0.12+1"
   walletconnect_flutter_v2:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: walletconnect_flutter_v2
       sha256: "00005750b01c5b924fc028e329bee5a77f79691c8c537709536e8ef27360510a"
@@ -902,7 +926,7 @@ packages:
     source: hosted
     version: "0.3.0"
   web3dart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: web3dart
       sha256: "31f93cf84b8c874d7ffb363959249d7e479115fe12cf46f30b037dcad6750b22"

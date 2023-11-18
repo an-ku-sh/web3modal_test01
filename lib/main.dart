@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import './home_page.dart';
+import './/utils/string_constants.dart';
 import 'package:web3modal_flutter/web3modal_flutter.dart';
 
 void main() {
@@ -13,71 +15,78 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
-  late W3MService _w3mService;
+  bool _isDarkMode = false;
+  Web3ModalThemeData? _themeData;
 
   @override
   void initState() {
     super.initState();
-    _initializeW3MService();
-  }
-
-  void _initializeW3MService() async {
-    _w3mService = W3MService(
-      projectId: 'YOUR_PROJECT_ID',
-      metadata: const PairingMetadata(
-        name: 'Web3Modal Flutter Example',
-        description: 'Web3Modal Flutter Example',
-        url: 'https://www.walletconnect.com/',
-        icons: ['https://walletconnect.com/walletconnect-logo.png'],
-        redirect: Redirect(
-          native: 'flutterdapp://',
-          universal: 'https://www.walletconnect.com',
-        ),
-      ),
-    );
-
-    await _w3mService.init();
+    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      setState(() {
+        final platformDispatcher = View.of(context).platformDispatcher;
+        final platformBrightness = platformDispatcher.platformBrightness;
+        _isDarkMode = platformBrightness == Brightness.dark;
+      });
+    });
   }
 
   @override
   void dispose() {
-    // _w3mService.removeListener(_onWalletUpdated);
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
+  void didChangePlatformBrightness() {
+    if (mounted) {
+      setState(() {
+        final platformDispatcher = View.of(context).platformDispatcher;
+        final platformBrightness = platformDispatcher.platformBrightness;
+        _isDarkMode = platformBrightness == Brightness.dark;
+      });
+    }
+    super.didChangePlatformBrightness();
+  }
+
+  // This widget is the root of your application.
+  @override
   Widget build(BuildContext context) {
     return Web3ModalTheme(
-      isDarkMode: true,
+      isDarkMode: _isDarkMode,
+      themeData: _themeData,
       child: MaterialApp(
-        title: 'Web3Modal Demo',
-        home: Builder(
-          builder: (context) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Web3Modal Demo'),
-                backgroundColor: Web3ModalTheme.colorsOf(context).background100,
-                foregroundColor: Web3ModalTheme.colorsOf(context).foreground100,
-              ),
-              backgroundColor: Web3ModalTheme.colorsOf(context).background300,
-              body: Container(
-                constraints: const BoxConstraints.expand(),
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  children: !_w3mService.isConnected
-                      ? [
-                          W3MNetworkSelectButton(service: _w3mService),
-                          W3MConnectWalletButton(service: _w3mService),
-                        ]
-                      : [
-                          W3MAccountButton(service: _w3mService),
-                        ],
-                ),
-              ),
-            );
-          },
+        debugShowCheckedModeBanner: false,
+        title: StringConstants.w3mPageTitleV3,
+        home: MyHomePage(
+          swapTheme: () => _swapTheme(),
+          changeTheme: () => _changeTheme(),
         ),
       ),
     );
+  }
+
+  void _swapTheme() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
+  void _changeTheme() {
+    setState(() {
+      _themeData = (_themeData == null)
+          ? Web3ModalThemeData(
+              lightColors: Web3ModalColors.lightMode.copyWith(
+                accent100: Colors.red,
+                background125: Colors.yellow.shade300,
+              ),
+              darkColors: Web3ModalColors.darkMode.copyWith(
+                accent100: Colors.green,
+                background125: Colors.brown,
+              ),
+              radiuses: Web3ModalRadiuses.square,
+            )
+          : null;
+    });
   }
 }
